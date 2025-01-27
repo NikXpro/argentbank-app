@@ -14,7 +14,7 @@ export function Nav() {
       <div>
         <Link to="/user" className="main-nav-item">
           <i className="fa fa-user-circle"></i>
-          <span>Sign In</span>
+          <span> Sign In</span>
         </Link>
       </div>
     </nav>
