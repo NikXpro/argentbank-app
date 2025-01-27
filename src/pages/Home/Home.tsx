@@ -1,10 +1,11 @@
 import "@pages/Home/Home.scss";
-import { Hero } from "../../components/Pages/Home";
+import { Feature, Hero } from "../../components/Pages/Home";
 
 export function Home() {
   return (
     <>
       <Hero />
+      <Feature />
     </>
   );
 }
