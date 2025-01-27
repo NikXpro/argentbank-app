@@ -9,7 +9,7 @@ export function Nav() {
           src="./img/argentBankLogo.png"
           alt="Argent Bank Logo"
         />
-        {/* <h1 className="sr-only">Argent Bank</h1> */}
+        <h1 className="sr-only">Argent Bank</h1>
       </Link>
       <div>
         <Link to="/user" className="main-nav-item">
