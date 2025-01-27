@@ -26,16 +26,14 @@
   /* Paths */
   "baseUrl": ".",
   "paths": {
-    "@hooks/*": ["./src/hooks/*"],
-    "@utils/*": ["./src/utils/*"],
-    "@assets/*": ["./src/assets/*"],
-    "@providers/*": ["./src/providers/*"],
-    "@components/*": ["./src/components/*"],
-    "@shared/*": ["./src/components/shared/*"],
-    "@ui/*": ["./src/components/ui/*"],
-    "@pages/*": ["./src/pages/*"],
-    "@public/*": ["./public/*"],
-    "@/*": ["./src/*"]
+    "@hooks/*": ["src/hooks/*"],
+    "@utils/*": ["src/utils/*"],
+    "@assets/*": ["src/assets/*"],
+    "@providers/*": ["src/providers/*"],
+    "@components/*": ["src/components/*"],
+    "@pages/*": ["src/pages/*"],
+    "@public/*": ["public/*"],
+    "@/*": ["src/*"]
   },
   "include": ["src"]
 }
