@@ -1,3 +1,5 @@
+import "./Hero.scss";
+
 export function Hero() {
   return (
     <div className="hero">
