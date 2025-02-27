@@ -1,13 +1,21 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router";
-import { logout } from "../../store/authSlice";
-import { RootState } from "../../store/store";
+import { getProfile, logout } from "../../store/authSlice";
+import { AppDispatch, RootState } from "../../store/store";
 import "./Nav.scss";
 
 export function Nav() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { user, token } = useSelector((state: RootState) => state.auth);
   const isLoggedIn = !!token && !!user;
+
+  useEffect(() => {
+    // Si on a un token mais pas d'utilisateur, on récupère le profil
+    if (token && !user) {
+      dispatch(getProfile());
+    }
+  }, [dispatch, token, user]);
 
   const handleLogout = () => {
     dispatch(logout());
