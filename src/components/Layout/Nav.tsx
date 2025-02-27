@@ -1,6 +1,18 @@
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router";
+import { logout } from "../../store/authSlice";
+import { RootState } from "../../store/store";
 import "./Nav.scss";
+
 export function Nav() {
+  const dispatch = useDispatch();
+  const { user, token } = useSelector((state: RootState) => state.auth);
+  const isLoggedIn = !!token && !!user;
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   return (
     <nav className="main-nav">
       <NavLink to="/" className="main-nav-logo">
@@ -12,10 +24,23 @@ export function Nav() {
         <h1 className="sr-only">Argent Bank</h1>
       </NavLink>
       <div>
-        <NavLink to="/signin" className="main-nav-item">
-          <i className="fa fa-user-circle"></i>
-          <span> Sign In</span>
-        </NavLink>
+        {isLoggedIn ? (
+          <>
+            <NavLink to="/user" className="main-nav-item">
+              <i className="fa fa-user-circle"></i>
+              {` ${user?.firstName} `}
+            </NavLink>
+            <NavLink to="/" className="main-nav-item" onClick={handleLogout}>
+              <i className="fa fa-sign-out"></i>
+              {" Sign Out"}
+            </NavLink>
+          </>
+        ) : (
+          <NavLink to="/login" className="main-nav-item">
+            <i className="fa fa-user-circle"></i>
+            Sign In
+          </NavLink>
+        )}
       </div>
     </nav>
   );
