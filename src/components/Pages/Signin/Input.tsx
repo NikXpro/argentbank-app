@@ -5,13 +5,24 @@ type InputProps = {
   label: string;
   type: string;
   isRemember?: boolean;
+  value?: string;
+  checked?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export function Input({ id, label, type, isRemember = false }: InputProps) {
+export function Input({
+  id,
+  label,
+  type,
+  isRemember = false,
+  value,
+  checked,
+  onChange,
+}: InputProps) {
   if (isRemember) {
     return (
       <div className="input-remember">
-        <input type="checkbox" id={id} />
+        <input type="checkbox" id={id} checked={checked} onChange={onChange} />
         <label htmlFor={id}>{label}</label>
       </div>
     );
@@ -20,7 +31,7 @@ export function Input({ id, label, type, isRemember = false }: InputProps) {
   return (
     <div className="input-wrapper">
       <label htmlFor={id}>{label}</label>
-      <input type={type} id={id} />
+      <input type={type} id={id} value={value} onChange={onChange} />
     </div>
   );
 }
