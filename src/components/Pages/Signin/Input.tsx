@@ -8,6 +8,8 @@ type InputProps = {
   value?: string;
   checked?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  hideLabel?: boolean;
+  placeholder?: string;
 };
 
 export function Input({
@@ -18,6 +20,8 @@ export function Input({
   value,
   checked,
   onChange,
+  hideLabel = false,
+  placeholder,
 }: InputProps) {
   if (isRemember) {
     return (
@@ -30,8 +34,15 @@ export function Input({
 
   return (
     <div className="input-wrapper">
-      <label htmlFor={id}>{label}</label>
-      <input type={type} id={id} value={value} onChange={onChange} />
+      {!hideLabel && <label htmlFor={id}>{label}</label>}
+      <input
+        type={type}
+        id={id}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder || (hideLabel ? label : undefined)}
+        aria-label={label}
+      />
     </div>
   );
 }
