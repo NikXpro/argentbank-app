@@ -5,13 +5,13 @@ import { useNavigate } from "react-router";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Pages/Signin/Input";
 import { AccountItem } from "../../components/Pages/User/AccountItem";
-import { getProfile, updateProfile } from "../../store/authSlice";
+import { getProfile, logout, updateProfile } from "../../store/authSlice";
 import { AppDispatch, RootState } from "../../store/store";
 
 export function User() {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const { user, token, isLoading } = useSelector(
+  const { user, token, isLoading, error } = useSelector(
     (state: RootState) => state.auth
   );
   const [isEditing, setIsEditing] = useState(false);
@@ -21,25 +21,38 @@ export function User() {
   });
 
   useEffect(() => {
-    // Si pas de token, redirection vers login
-    if (!token) {
-      navigate("/login");
-      return;
-    }
+    const loadUserData = async () => {
+      // Si pas de token, redirection vers login
+      if (!token) {
+        navigate("/login");
+        return;
+      }
 
-    // Si token mais pas d'utilisateur, on récupère le profil
-    if (token && !user) {
-      dispatch(getProfile());
-    }
+      // Si token mais pas d'utilisateur, on récupère le profil
+      if (token && !user) {
+        try {
+          await dispatch(getProfile());
+        } catch (err) {
+          console.error("Failed to load profile:", err);
+          // Si le token est expiré, on déconnecte l'utilisateur
+          if (error === "jwt expired") {
+            dispatch(logout());
+          }
+          navigate("/login");
+        }
+      }
 
-    // Mise à jour du formulaire quand l'utilisateur est chargé
-    if (user) {
-      setFormData({
-        firstName: user.firstName,
-        lastName: user.lastName,
-      });
-    }
-  }, [dispatch, navigate, token, user]);
+      // Mise à jour du formulaire quand l'utilisateur est chargé
+      if (user) {
+        setFormData({
+          firstName: user.firstName,
+          lastName: user.lastName,
+        });
+      }
+    };
+
+    loadUserData();
+  }, [dispatch, navigate, token, user, error]);
 
   if (!user) {
     return null;
