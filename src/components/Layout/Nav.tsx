@@ -31,20 +31,24 @@ export function Nav() {
         />
         <h1 className="sr-only">Argent Bank</h1>
       </NavLink>
-      <div>
+      <div className="main-nav-items">
         {isLoggedIn ? (
           <>
-            <NavLink to="/user" className="main-nav-item">
+            <NavLink to="/profile" className="main-nav-items-item">
               <i className="fa fa-user-circle"></i>
               {` ${user?.firstName} `}
             </NavLink>
-            <NavLink to="/" className="main-nav-item" onClick={handleLogout}>
+            <NavLink
+              to="/"
+              className="main-nav-items-item"
+              onClick={handleLogout}
+            >
               <i className="fa fa-sign-out"></i>
               {" Sign Out"}
             </NavLink>
           </>
         ) : (
-          <NavLink to="/login" className="main-nav-item">
+          <NavLink to="/login" className="main-nav-items-item">
             <i className="fa fa-user-circle"></i>
             Sign In
           </NavLink>
