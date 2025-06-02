@@ -38,3 +38,21 @@
     width: fit-content;
   }
 }
+
+@media (max-width: 720px) {
+  .account {
+    width: 95%;
+    padding: 0.8rem;
+    &-title {
+      font-size: 0.8rem;
+    }
+
+    &-amount {
+      padding: 0 0 0.5rem;
+      font-size: 1.5rem;
+      &-description {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
