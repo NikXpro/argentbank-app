@@ -10,3 +10,10 @@
   background-color: #00bc77;
   color: #fff;
 }
+
+@media (max-width: 720px) {
+  .button {
+    padding: 8px 14px;
+    font-size: 0.95rem;
+  }
+}
