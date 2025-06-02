@@ -22,7 +22,7 @@ export function Signin() {
   useEffect(() => {
     if (token) {
       dispatch(getProfile());
-      navigate("/user");
+      navigate("/profile");
     }
   }, [token, dispatch, navigate]);
 
